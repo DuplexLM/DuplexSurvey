@@ -1,6 +1,6 @@
-<div align='center'>
+<!-- <div align='center'>
 <img src="./asset/title.png" alt="paper-title" style="zoom: 30%;" />
-</div>
+</div> -->
 
 # 🚀 Quick Start
 
@@ -41,7 +41,7 @@ Figure 1: Timeline of published full-duplex spoken dialogue systems, 2021-2026, 
 
 ## Architectural Hierarchy and Cross-System Audit
 
-The L0--L3 hierarchy asks **where** duplex decisions happen: external module, hidden state, token sequence, or shared latent.
+The L0-L3 hierarchy asks **where** duplex decisions happen: external module, hidden state, token sequence, or shared latent.
 
 <div align='center'>
 <img src="./asset/figure_l0_l3_architecture.png" alt="L0-L3 architectural hierarchy" style="zoom: 25%;" />
@@ -109,7 +109,23 @@ Public full-duplex resources, organized by TIR coverage.
 
 ### Publicly Available Full-Duplex Models
 
-TBD.
+Only paper-mentioned models with verified public GitHub repositories are listed.
+
+| Model | URL |
+|---|---|
+| dGSLM (pre-history) | [https://github.com/facebookresearch/fairseq/tree/main/examples/textless_nlp/dgslm](https://github.com/facebookresearch/fairseq/tree/main/examples/textless_nlp/dgslm) |
+| Duplex-Model | [https://github.com/thunlp/duplex-model](https://github.com/thunlp/duplex-model) |
+| FireRedChat | [https://github.com/FireRedTeam/FireRedChat](https://github.com/FireRedTeam/FireRedChat) |
+| X-Talk | [https://github.com/xcc-zach/xtalk](https://github.com/xcc-zach/xtalk) |
+| SoulX-Duplug | [https://github.com/Soul-AILab/SoulX-Duplug](https://github.com/Soul-AILab/SoulX-Duplug) |
+| Freeze-Omni | [https://github.com/VITA-MLLM/Freeze-Omni](https://github.com/VITA-MLLM/Freeze-Omni) |
+| Fun-Audio-Chat | [https://github.com/FunAudioLLM/Fun-Audio-Chat](https://github.com/FunAudioLLM/Fun-Audio-Chat) |
+| Covo-Audio | [https://github.com/Tencent/Covo-Audio](https://github.com/Tencent/Covo-Audio) |
+| Step-Audio R1.1 | [https://github.com/stepfun-ai/Step-Audio-R1](https://github.com/stepfun-ai/Step-Audio-R1) |
+| Moshi | [https://github.com/kyutai-labs/moshi](https://github.com/kyutai-labs/moshi) |
+| Mini-Omni2 | [https://github.com/gpt-omni/mini-omni2](https://github.com/gpt-omni/mini-omni2) |
+| DuplexMamba | [https://github.com/khfs/DuplexMamba](https://github.com/khfs/DuplexMamba) |
+| SALMONN-omni | [https://github.com/bytedance/SALMONN](https://github.com/bytedance/SALMONN) |
 
 ### Full-Duplex Datasets
 
