@@ -41,7 +41,7 @@ Figure 1: Timeline of published full-duplex spoken dialogue systems, 2021-2026, 
 
 ## Architectural Hierarchy and Cross-System Audit
 
-The L0-L3 hierarchy asks **where** duplex decisions happen: external module, hidden state, token sequence, or shared latent.
+This section reframes the architecture debate around one diagnostic question: **where does the system decide whether to listen, speak, wait, or handle overlap?** Labels such as cascaded, end-to-end, engineered, and learned are too coarse for full-duplex systems, because two systems with similar pipelines may make the duplex decision at very different layers. The L0-L3 hierarchy separates this decision locus from the rest of the implementation: L0 keeps it in an external controller; L1 reads LLM hidden states through a sidecar predictor; L2 lets the token sequence itself carry duplex timing; L3 would move the decision into a shared latent representation.
 
 <div align='center'>
 <img src="./asset/figure_l0_l3_architecture.png" alt="L0-L3 architectural hierarchy" style="zoom: 25%;" />
@@ -49,23 +49,23 @@ The L0-L3 hierarchy asks **where** duplex decisions happen: external module, hid
 Figure 2: The L0-L3 architectural hierarchy. The decision migrates from an external scheduler (L0), to a sidecar predictor reading LLM hidden states (L1), to the token stream itself (L2), and finally to a hypothetical shared latent representation (L3, not yet realized).
 </div>
 
-Key claims: **L0 remains competitive rather than obsolete**; **L1 is a broad architectural attractor**; **L2 is the most populous and fully state-reachable but heterogeneous**; **L3 remains open**.
+The hierarchy is not a progress ladder. The cross-system audit shows that **L0 remains competitive rather than obsolete**; **L1 has become a broad architectural attractor for production-oriented speech systems**; **L2 is the most populous and fully state-reachable but internally heterogeneous**; and **L3 is still an unrealized architectural frontier**.
 
 <div align='center'>
 <img src="./asset/tables/table1_audit.svg" alt="Cross-system audit by L-layer with FSM-state reachability" style="zoom: 100%;" />
 </div>
 
-Architecture gives reachability; data decides behavior. Two L2 systems may both reach **Dual**, yet diverge on T3-I2-R1 backchanneling.
+The main lesson is reachability versus realization. Architecture decides which FSM states a system can reach by construction; data and training decide whether it behaves correctly inside those states. Two L2 systems may both reach **Dual**, yet still diverge on T3-I2-R1 backchanneling, because recognizing "uh-huh" as support rather than interruption is learned behavior, not just an architectural affordance.
 
 ## The T × I × R Interaction Ontology
 
-T × I × R asks **which** interaction the system faces: temporal relation, user intent, and required system response.
+If L0-L3 asks where the duplex decision is made, T × I × R asks **what interaction that decision is about**. The core idea is that "overlap" is not a single capability: user speech during assistant speech may be a backchannel, a floor claim, a repair, or irrelevant third-party audio, and each case requires a different system response. The ontology therefore decomposes every moment into three orthogonal axes: temporal relation (T), user intent (I), and required system response (R).
 
 <div align='center'>
 <img src="./asset/tables/table2_tir_axes.svg" alt="TIR interaction ontology axes" style="zoom: 100%;" />
 </div>
 
-Six acid-test cells cover main full-duplex failure modes:
+The full grid gives a coordinate system for full-duplex behavior. From it, the paper highlights six acid-test cells: a compact stress suite that exposes the main ways current systems fail.
 
 <div align='center'>
 <img src="./asset/tables/six_acid_test_cells.svg" alt="Six acid-test cells for full-duplex interaction" style="zoom: 100%;" />
@@ -77,17 +77,17 @@ Six acid-test cells cover main full-duplex failure modes:
 Figure 3: Six canonical full-duplex interaction scenarios. Each panel concretizes one (T, I, R) ontology cell on User (U) / Assistant (A) audio timelines.
 </div>
 
-Same cells serve as **data slices**, **benchmark criteria**, and **ablation targets**. "Fails on T3-I2-R1" is more useful than "not always full-duplex."
+These cells are not just examples. They become **data slices**, **benchmark criteria**, and **ablation targets**: a dataset can state which cells it covers, a benchmark can isolate one cell, and a model audit can report exactly where behavior breaks. "Fails on T3-I2-R1" is more useful than "not always full-duplex," because it says the system mistakes a backchannel for an interruption.
 
 ## The Full-Duplex Decision State Machine
 
-Decision state machine asks **what the system is doing now**: Idle, Listen, Speak, Wait, or Dual.
+The decision state machine completes the three-part framework. L0-L3 says where a duplex decision is made, and TIR says which interaction the system is facing; the FSM says **what the system is doing now** and when it should switch modes. This matters because full-duplex behavior is not only a classification problem. A system must keep a running policy over time: listen, speak, wait through hesitation, or integrate overlapping speech without losing the thread.
 
 <div align='center'>
 <img src="./asset/tables/table3_state_machine.svg" alt="Five states in the full-duplex decision state machine" style="zoom: 100%;" />
 </div>
 
-Eleven transitions group into onset, turn-handoff, and overlap transitions. Overlap is key: destination depends on whether user audio is backchannel, floor claim, third-party speech, or other intent.
+The five states extend earlier Speak/Listen formulations with two crucial additions: **Wait**, for semantic hesitation where silence does not mean the user is finished, and **Dual**, for the genuinely duplex regime where both speakers produce audio and the system must still interpret the user. The eleven transitions group into onset, turn-handoff, and overlap transitions. Overlap is the hard case: the destination depends on whether the user audio is a backchannel, a floor claim, third-party speech, or another intent.
 
 <div align='center'>
 <img src="./asset/figure_interaction_state_machine.png" alt="full-duplex decision state machine" style="zoom: 25%;" />
@@ -95,13 +95,13 @@ Eleven transitions group into onset, turn-handoff, and overlap transitions. Over
 Figure 4: The full-duplex decision state machine: five states and eleven transitions. Each transition is labelled by its (T, I) trigger and the resulting R action.
 </div>
 
-TIR cells map directly to transitions: T3-I4-R2 → Speak → Dual → Listen; T3-I2-R1 and T3-I7-R5 → Speak → Dual → Speak; T5-I6-R3 → Listen → Wait → Listen.
+TIR cells map directly to transition traces. T3-I4-R2 becomes Speak → Dual → Listen; T3-I2-R1 and T3-I7-R5 become Speak → Dual → Speak; T5-I6-R3 becomes Listen → Wait → Listen. This gives builders and evaluators a shared language for failure analysis: "the model never enters Wait" or "the Dual → Speak transition confuses backchannel with interruption" is more actionable than saying the model has weak full-duplex ability.
 
 ## Frontiers and Conclusion
 
-Two frontiers: **data coverage** and **L3 architecture**. Public data still under-covers T4 concurrent speech and I7 third-party speech; L3 remains unrealized.
+The audit points to two frontiers. **Data coverage** is the first: architecture may make a state reachable, but public data still under-covers T4 concurrent speech and I7 third-party speech, so many systems cannot learn the hardest cells well. **L3 architecture** is the second: no published system has yet made Dual native to a shared latent representation.
 
-Together, T × I × R, the five-state FSM, and L0-L3 replace "is this full-duplex?" with a structured profile: cells covered, states reached, implementation layer.
+Together, T × I × R, the five-state FSM, and L0-L3 replace "is this full-duplex?" with a structured profile: cells covered, states reached, and implementation layer. The point is not just to survey existing systems, but to give future data construction, benchmarking, and model design a common coordinate system.
 
 ## Appendix: Public Resources
 
