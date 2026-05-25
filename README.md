@@ -105,15 +105,11 @@ Together, T × I × R, the five-state FSM, and L0-L3 replace "is this full-duple
 
 ## Appendix: Public Resources
 
-Public full-duplex resources, organized by TIR coverage.
-
 ### Publicly Available Full-Duplex Models
-
-Only paper-mentioned models with verified public GitHub repositories are listed.
 
 | Model | URL |
 |---|---|
-| dGSLM (pre-history) | [https://github.com/facebookresearch/fairseq/tree/main/examples/textless_nlp/dgslm](https://github.com/facebookresearch/fairseq/tree/main/examples/textless_nlp/dgslm) |
+| dGSLM | [https://github.com/facebookresearch/fairseq/tree/main/examples/textless_nlp/dgslm](https://github.com/facebookresearch/fairseq/tree/main/examples/textless_nlp/dgslm) |
 | Duplex-Model | [https://github.com/thunlp/duplex-model](https://github.com/thunlp/duplex-model) |
 | FireRedChat | [https://github.com/FireRedTeam/FireRedChat](https://github.com/FireRedTeam/FireRedChat) |
 | X-Talk | [https://github.com/xcc-zach/xtalk](https://github.com/xcc-zach/xtalk) |
