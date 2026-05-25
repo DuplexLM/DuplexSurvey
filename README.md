@@ -6,15 +6,17 @@
 
 This repository accompanies **A Survey of Full-Duplex Spoken Dialogue Systems: Interaction Ontology, Decision State Machine, and Architectural Hierarchy**.
 
-- [🔥What's new](#whats-new)
-  - [Introduction](#introduction)
-  - [A Brief History of Full-Duplex Spoken Dialogue Systems](#a-brief-history-of-full-duplex-spoken-dialogue-systems)
-  - [Architectural Hierarchy and Cross-System Audit](#architectural-hierarchy-and-cross-system-audit)
-  - [The T × I × R Interaction Ontology](#the-t--i--r-interaction-ontology)
-  - [The Full-Duplex Decision State Machine](#the-full-duplex-decision-state-machine)
-  - [Frontiers and Conclusion](#frontiers-and-conclusion)
-  - [Appendix: Public Resources](#appendix-public-resources)
-  - [Cite](#cite)
+- [Introduction](#introduction)
+- [A Brief History of Full-Duplex Spoken Dialogue Systems](#a-brief-history-of-full-duplex-spoken-dialogue-systems)
+- [Architectural Hierarchy and Cross-System Audit](#architectural-hierarchy-and-cross-system-audit)
+- [The T × I × R Interaction Ontology](#the-t--i--r-interaction-ontology)
+- [The Full-Duplex Decision State Machine](#the-full-duplex-decision-state-machine)
+- [Frontiers and Conclusion](#frontiers-and-conclusion)
+- [Appendix: Public Resources](#appendix-public-resources)
+    - [Publicly Available Full-Duplex Models](#publicly-available-full-duplex-models)
+    - [Full-Duplex Datasets](#full-duplex-datasets)
+    - [Full-Duplex Benchmarks](#full-duplex-benchmarks)
+- [Cite](#cite)
 
 # 🔥What's new
 
@@ -133,7 +135,7 @@ TBD.
 | Japanese CALLHOME | T1 Sequential / T3 Overlap / T5 Silence; I2 Backchannel / I6 Disfluency; R4 Backchannel | ~49 h full corpus; J-Moshi uses 16 h | [LDC96S37](https://catalog.ldc.upenn.edu/LDC96S37) |
 | AliMeeting | T1 Sequential / T3 Overlap / T5 Silence | 118.75 h | [OpenSLR 119](https://www.openslr.org/119/) |
 | MMedFD | T1 Sequential / T3 Overlap; I4 Floor-claim | 39.04 h | [Hugging Face](https://huggingface.co/datasets/HanselZz/MMedFD) |
-| HumDial-FDBench / HumDial Track 2 Dataset | T3 Overlap / T5 Silence; I2 Backchannel / I4 Floor-claim / I6 Disfluency / I7 Third-party; R2 Stop / R3 Wait / R5 Ignore | train 9,418 / dev 1,800 / test 5,000 utterances; train 107+ h | [Hugging Face](https://huggingface.co/datasets/ASLP-lab/HumDial-FDBench) |
+| HumDial-FDBench / HumDial Track 2 Dataset | T3 Overlap / T5 Silence; I2 Backchannel / I4 Floor-claim / I6 Disfluency / I7 Third-party; R2 Stop / R3 Wait / R5 Ignore | train 8,898 / dev 1,800 / test 5,000 instances; train 107+ h | [Hugging Face](https://huggingface.co/datasets/ASLP-lab/HumDial-FDBench) |
 
 ### Full-Duplex Benchmarks
 
@@ -142,7 +144,7 @@ TBD.
 | Full-Duplex-Bench | T3 Overlap; I2 Backchannel / I4 Floor-claim; R2 Stop / R4 Backchannel | 727 samples | [GitHub](https://github.com/DanielLin94144/Full-Duplex-Bench) |
 | Full-Duplex-Bench v1.5 | T3 Overlap; I2 Backchannel / I4 Floor-claim / I7 Third-party; R1 Continue / R2 Stop | 499 samples | [GitHub](https://github.com/DanielLin94144/Full-Duplex-Bench/tree/main/v1_v1.5) |
 | Full-Duplex-Bench v2 | T3 Overlap; I4 Floor-claim; R2 Stop / R4 Backchannel | 200 tasks | [GitHub](https://github.com/DanielLin94144/Full-Duplex-Bench/tree/main/v2) |
-| Full-Duplex-Bench v3 | T3 Overlap; I4 Floor-claim; R2 Stop | 100 scenarios | [GitHub](https://github.com/DanielLin94144/Full-Duplex-Bench/tree/main/v3) |
+| Full-Duplex-Bench v3 | T3 Overlap; I4 Floor-claim; R2 Stop | 100 examples, 79 unique scenarios, 12 speakers | [GitHub](https://github.com/DanielLin94144/Full-Duplex-Bench/tree/main/v3) |
 | FD-Bench | T3 Overlap; I2 Backchannel / I4 Floor-claim; R2 Stop / R4 Backchannel | 293 conversations / 1,196 interruptions / ~40 h | [HF audio input](https://huggingface.co/datasets/pengyizhou/FD-Bench-Audio-Input) |
 | MTR-DuplexBench | T3 Overlap; I2 Backchannel / I4 Floor-claim / I7 Third-party; R2 Stop / R4 Backchannel | 200 + 200 + 300 + 520 items | [Hugging Face](https://huggingface.co/datasets/Jeff0918/MTR-DuplexBench) |
 | MMedFD | T1 Sequential / T3 Overlap; I4 Floor-claim | 39.04 h | [Hugging Face](https://huggingface.co/datasets/HanselZz/MMedFD) |
